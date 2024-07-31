@@ -52,7 +52,12 @@ INSERT INTO banque (nom) VALUES
 INSERT INTO responsable (nom, contact) VALUES 
     ('Pierre', '0345472148');
 
-
+update infoproduit set photo='produit/miel-epice.jpg' where idproduit=4;
+update infoproduit set photo='produit/detox.jpg' where idproduit=3;
+update infoproduit set photo='produit/gingembre-cannelle.jpg' where idproduit=2;
+update infoproduit set photo='produit/gingembre-citron.jpg' where idproduit=1;
+update infoproduit set photo='produit/misao.jpg' where idproduit>4;
+update infoproduit set photo='produit/the-noir.jpg' where idproduit>8;
 
 INSERT INTO quartier (nom) VALUES ('Quartier1'), ('Quartier2'), ('Quartier3'), ('Quartier4'), ('Quartier5');
 

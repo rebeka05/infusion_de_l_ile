@@ -1,5 +1,5 @@
 create or replace view v_produit as
-    select idinfoproduit, i.idproduit, p.idtype, p.nom, qte, u.nom as unite, pu, t.nom as type 
+    select idinfoproduit, i.idproduit, p.idtype, p.nom, qte, u.nom as unite, pu, i.photo, t.nom as type 
     from infoproduit i
     join produit p on p.idproduit=i.idproduit
     join unite u on u.idunite=i.idunite

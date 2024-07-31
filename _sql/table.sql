@@ -32,8 +32,10 @@ create table infoproduit(
     idunite integer references unite (idunite),
     qte numeric(10,2),
     pu numeric(18,2),
+    photo varchar,
     etat integer
 );
+-- alter table infoproduit add column photo varchar;
 
 create table lieu(
     idlieu serial primary key,
