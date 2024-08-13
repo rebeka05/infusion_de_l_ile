@@ -119,8 +119,11 @@ class SaisieController extends Controller
         $clients = Generic::select('client')->get();
         $produits = Generic::select('v_produit')->get();
         $lieux = Generic::select('v_lieuclient', "*", [ ["idclient", "=", $clients[0]->idclient] ])->get();
+        $date = date('Y-m-d');
+        $date_exp = Generic::select('detailvente', "*", [], [], 'iddetailvente', 'desc')->first();
+        $expiration = isset($date_exp->expiration) ? $date_exp->expiration : date('Y-m-d');    
 
-        return view('saisie.saisieechange', ['clients' => $clients, "lieux" => $lieux, "produits" => $produits, 'nomPage' => 'Echange']);
+        return view('saisie.saisieechange', ['date' => $date, 'expiration' => $expiration, 'clients' => $clients, "lieux" => $lieux, "produits" => $produits, 'nomPage' => 'Echange']);
     }
 
     public function traitementEchange(Request $request){
@@ -155,9 +158,10 @@ class SaisieController extends Controller
         $lieux = Generic::select('v_lieuclient', "*", [ ["idclient", "=", $clients[0]->idclient] ])->get();
         $responsables = Generic::select('responsable')->get();
         $date_exp = Generic::select('detailvente', "*", [], [], 'iddetailvente', 'desc')->first();
-        $expiration = isset($date_exp->expiration) ? $date_exp->expiration : date('Y-m-d');
+        $expiration = isset($date_exp->expiration) ? $date_exp->expiration : date('Y-m-d');        
+        $date = date('Y-m-d');
 
-        return view('saisie.saisievente', ['expiration' => $expiration, 'clients' => $clients, "lieux" => $lieux, "responsables" => $responsables, 'produits' => $produits, 'nomPage' => 'Saisie Vente']);
+        return view('saisie.saisievente', ['date' => $date, 'expiration' => $expiration, 'clients' => $clients, "lieux" => $lieux, "responsables" => $responsables, 'produits' => $produits, 'nomPage' => 'Saisie Vente']);
     }
 
     public function traitementVente(Request $request){        

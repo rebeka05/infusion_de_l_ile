@@ -2,12 +2,12 @@
 <form action="{{ route('filtrelistePaiement') }}" method="get">
 @csrf
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 mt-5">
     <div class="row">
         <div class="col-10">
         
           <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-lg-2 mb-3">
+            <div class="col-md-2 mb-3">
               <label class="form-control-label">Client</label>
               <select class="form-control" name="idclient" id="idclient">
                 <option value=""> Tous </option>
@@ -16,7 +16,7 @@
               @endforeach
               </select>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-md-2 mb-3">
               <label class="form-control-label">Lieu</label>
               <select class="form-control" name="idlieu">
                 <option value=""> Tous </option>
@@ -25,7 +25,7 @@
               @endforeach
               </select>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-md-2 mb-3">
               <label class="form-control-label">Mode de paiement</label>
               <select class="form-control" name="idmodepaiement">
                 <option value=""> Tous </option>
@@ -34,7 +34,7 @@
               @endforeach
               </select>
             </div>
-            <div class="col-lg-1 mb-3">
+            <div class="col-md-1 mb-3">
               <label class="form-control-label">Mois</label>
               <select class="form-control" name="idmois">
                 <option value=""> Tous </option>
@@ -43,7 +43,7 @@
               @endforeach
               </select>
             </div>
-            <div class="col-lg-1 mb-3">
+            <div class="col-md-1 mb-3">
               <label class="form-control-label">Annee</label>
               <select class="form-control" name="annee">
                 <option value=""> Tous </option>
@@ -52,11 +52,11 @@
               @endforeach
               </select>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-md-2 mb-3">
               <label class="form-control-label">Date de paiement</label>
               <input type="date" class="form-control" name="datepaiement">
             </div>
-            <div class="col-lg-1 mb-3">
+            <div class="col-md-1 mb-3">
               <input type="submit" value="filtrer" class="btn btn-outline-primary btn-sm w-140 mt-4 mb-0">
             </div>
           </div>
@@ -71,11 +71,11 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th class="col-lg-1 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Date</th>
-                      <th class="col-lg-2 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-1">Client</th>
-                      <th class="col-lg-2 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Ref</th>
-                      <th class="col-lg-5 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Mode de paiement</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xs font-weight-bolder opacity-7 pe-2">Montant : {{ number_format($total, 2, '.', ' ') }}</th>
+                      <th class="col-md-1 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Date</th>
+                      <th class="col-md-2 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-1">Client</th>
+                      <th class="col-md-2 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Ref</th>
+                      <th class="col-md-5 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Mode de paiement</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xs font-weight-bolder opacity-7 pe-2">Montant : {{ number_format($total, 2, '.', ' ') }}</th>
                     </tr>
                   </thead>
                   <tbody>

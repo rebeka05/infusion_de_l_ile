@@ -27,7 +27,8 @@ create or replace view v_paiement as
     join client c on c.idclient=v.idclient
     join lieu l on l.idlieu=v.idlieu
     join infoclient i on i.idlieu=l.idlieu and i.idclient=c.idclient
-    group by v.idvente, v.idinfoclient, i.entite, v.idclient, c.nom, v.idlieu, l.nom, v.datevente, v.ref, v.nbdc, v.responsable, v.contact, v.total;
+    group by v.idvente, v.idinfoclient, i.entite, v.idclient, c.nom, v.idlieu, l.nom, v.datevente, v.ref, v.nbdc, v.responsable, v.contact, v.total
+    order by v.datevente desc;
 
 create or replace view v_echange_non_valide as
     select e.*, c.nom as client, l.nom as lieu, i.entite, v.nom as produit, v.qte, v.unite, v.pu , v.type
@@ -74,7 +75,7 @@ create or replace view v_liste_paiement as
     join lieu l on l.idlieu=v.idlieu
     join infoclient i on i.idlieu=l.idlieu and i.idclient=c.idclient
     join modepaiement m on m.idmodepaiement=p.idmodepaiement
-    order by v.idvente asc, p.datepaiement desc;
+    order by p.datepaiement desc;
 
 create or replace view v_etat_vente as
     select idmois, annee, idinfoclient, entite, idclient, client, idlieu, lieu, responsable, contact, datevente, coalesce(sum(total), 0) as total
@@ -178,3 +179,19 @@ create or replace view v_etatechange as
     join v_produit v on v.idinfoproduit=e.idinfoproduit
     group by extract(month from dateechange), extract(year from dateechange), e.idinfoproduit, e.idinfoclient, i.entite, i.nom, v.nom, v.qte, v.unite, v.pu;
 
+drop VIEW v_etat_cheque;
+CREATE or replace VIEW v_etat_cheque AS
+SELECT 
+    p.*, ref, i.idclient, i.idinfoclient, i.entite as entite, l.idlieu, l.nom as lieu, b.nom as banque, extract(month from datepaiement) as idmois, extract(year from datepaiement) as annee,
+    CASE
+        WHEN dateversement IS NULL THEN '1'
+        WHEN dateversement IS NOT NULL AND datedispo IS NULL THEN '2'
+        WHEN dateversement IS NOT NULL AND datedispo IS NOT NULL THEN '3'
+    END AS etat
+FROM 
+    paiement p
+    join vente v on v.idvente=p.idvente
+    join infoclient i on v.idinfoclient=i.idinfoclient
+    join lieu l on l.idlieu=i.idlieu
+    join banque b on b.idbanque=p.idbanque
+where idmodepaiement=2;

@@ -74,8 +74,12 @@ class AjaxController extends Controller
         $annee = $request->query('annee');
         $type = $request->query('type');  
 
-        // $mois = Generic::select('mois')->get();
-        // $moisArray = $mois->toArray();
+        $mois = Generic::select('mois')->get();
+        $moisArray = $mois->toArray();
+        $labels4 = [];
+        foreach ($moisArray as $moisItem) {
+            $labels4[] = $moisItem['mois'];
+        }
 
         if($type == 1){            
             $etats = Generic::select('v_etatentite_annuel', ['*'], [ ["annee", "=", $annee] ], [], 'idmois', 'ASC')->get();
@@ -112,14 +116,14 @@ class AjaxController extends Controller
         else if($type == 2){            
             $etats = Generic::select('v_etatproduit_annuel', ['*'], [ ["annee", "=", $annee] ], [], 'idmois', 'ASC')->get();
             $etatArray = $etats->toArray();
-            $produitsData = [];
+            $clientsData = [];
             foreach ($etatArray as $etat) {
                 // Assurez-vous que l'ID du produit est présent dans le tableau
-                if (!isset($produitsData[$etat['idinfoproduit']])) {
-                    $produitsData[$etat['idinfoproduit']] = ['label' => $etat['nom'].' '.$etat['qte'].' '.$etat['unite'], 'data' => []];
+                if (!isset($clientsData[$etat['idinfoproduit']])) {
+                    $clientsData[$etat['idinfoproduit']] = ['label' => $etat['nom'].' '.$etat['qte'].' '.$etat['unite'], 'data' => []];
                 }
                 // Ajoutez la valeur total pour le mois correspondant
-                $produitsData[$etat['idinfoproduit']]['data'][$etat['mois']] = $etat['total'];
+                $clientsData[$etat['idinfoproduit']]['data'][$etat['mois']] = $etat['total'];
             }
             $colors = [
               'rgba(255, 99, 132, 0.2)', //rouge
@@ -137,7 +141,7 @@ class AjaxController extends Controller
               'rgba(255, 255, 0, 0.2)',
             ];
             $colorIndex = 0; // Index pour parcourir les couleurs disponibles
-            foreach ($produitsData as $produitData) {
+            foreach ($clientsData as $produitData) {
               $datas4[] = [
                   'label' => $produitData['label'],
                   'data' => $produitData['data'],
@@ -150,7 +154,8 @@ class AjaxController extends Controller
         }
 
         return response()->json([
-            'datas' => $datas4 // Remplacement de $datas par $datas2
+            'datas' => $datas4,
+            'labels' => $labels4
         ]);
     }
     

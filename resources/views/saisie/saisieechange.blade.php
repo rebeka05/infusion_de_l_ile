@@ -2,31 +2,28 @@
 <form action="{{ route('traitementEchange') }}" method="post">
     @csrf
 
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4 mt-5">
 
         <div class="row mt-5">
         <!-- <div class="row mt-2 d-flex justify-content-center align-items-center"> -->
 
-            <div class="col-lg-10 mb-lg-0 mb-4">
+            <div class="col-md-10 mb-lg-0 mb-4">
                 <div class="card">
 
                     <div class="card-body p-4">
 
                         <div class="row">
 
-                            <div class="col-lg-3 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label class="form-control-label">Date d'échange</label>
-                                <input type="date" class="form-control" name="date" value="{{ old('date') }}">
-                                @error('date')
-                                <p class="text-s text-primary mb-0">{{ $message }}</p>
-                                @enderror
+                                <input type="date" class="form-control" name="date" value="{{ $date }}">
                             </div>
 
                         </div>
 
                         <div class="row">
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Client</label>
                                 <select class="form-control" name="idclient" id="idclient">
                                     @foreach ($clients as $client)
@@ -35,7 +32,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Lieu</label>
                                 <select class="form-control" name="idlieu">
                                     @foreach ($lieux as $lieu)
@@ -53,13 +50,13 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="col-lg-6 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th class="col-md-6 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         Produit
                                     </th>
-                                    <th class="col-lg-2 text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    <th class="col-md-2 text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Qte
                                     </th>
-                                    <th class="col-lg-3 text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th class="col-md-3 text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         date d'éxpiration
                                     </th>
                                     <th></th>
@@ -86,7 +83,7 @@
                                     </td>
                                     <td class="align-middle text-sm">
                                         <input type="date" class="form-control" name="expiration[]"
-                                            value="{{ old('expiration[]') }}">
+                                            value="{{ $expiration }}">
                                         @error('expiration[]')
                                         <p class="text-s text-primary mb-0">{{ $message }}</p>
                                         @enderror
@@ -98,7 +95,7 @@
                             </table>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1">
+                            <div class="col-md-1">
                                 <div class="nav-link add-row">
                                     <div
                                         class="icon icon-shape icon-sm shadow border-radius-md bg-gradient-primary text-center ms-2">
@@ -112,7 +109,7 @@
                     </div>
 
                     <div class="row d-flex justify-content-center align-items-center ps-4 pb-4 pe-4">
-                        <div class="col-lg-6 text-center">
+                        <div class="col-md-6 text-center">
                             <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0">Entrer</button>
                         </div>
                     </div>

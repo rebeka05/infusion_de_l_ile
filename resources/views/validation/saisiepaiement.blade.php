@@ -2,11 +2,11 @@
 <form action="{{ route('traitementPaiement') }}" method="post">
 @csrf
 
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4 mt-5">
 
       <div class="row mt-6 d-flex justify-content-center align-items-center">
 
-        <div class="col-lg-4 mb-lg-0 mb-3">
+        <div class="col-md-4 mb-lg-0 mb-3">
           <div class="card">
 
             <div class="card-body p-4">              
@@ -18,13 +18,13 @@
                   <p class="text-xs text-secondary">{{$impaye->lieu}}</p>
                 </div>
 
-                <div class="col-lg-11 mb-3">
+                <div class="col-md-11 mb-3">
                   <label class="form-control-label">Date de paiement</label>
                   <input type="date" class="form-control" name="date">
                   <input type="hidden" name="idvente" value="{{ $impaye->idvente }}">
                 </div>
 
-                <div class="col-lg-11 mb-3">
+                <div class="col-md-11 mb-3">
                   <label class="form-control-label">Mode de paiement</label>
                   <select class="form-control" name="idmodepaiement" id="idmodepaiement">
                   @foreach ($modes as $mode)
@@ -32,7 +32,7 @@
                   @endforeach
                   </select>
                 </div>
-                <div class="col-lg-11 mb-3" id="banqueDiv">
+                <div class="col-md-11 mb-3" id="banqueDiv">
                   <label class="form-control-label">Banque</label>
                   <select class="form-control" name="idbanque" id="banqueSelect">
                       @foreach ($banques as $banque)
@@ -40,20 +40,20 @@
                       @endforeach
                   </select>
                 </div>
-                <div class="col-lg-11 mb-3" id="nomChequeDiv">
+                <div class="col-md-11 mb-3" id="nomChequeDiv">
                     <label class="form-control-label">Nom du chèque</label>
                     <input type="text" class="form-control" name="nom">
                 </div>
-                <div class="col-lg-11 mb-3" id="numeroChequeDiv">
+                <div class="col-md-11 mb-3" id="numeroChequeDiv">
                     <label class="form-control-label">Numéro du chèque</label>
                     <input type="text" class="form-control" name="numero">
                 </div>
-                <div class="col-lg-11 mb-3" id="dateChequeDiv">
+                <div class="col-md-11 mb-3" id="dateChequeDiv">
                     <label class="form-control-label">Date du chèque</label>
                     <input type="date" class="form-control" name="datecreation">
                 </div>
 
-                <div class="col-lg-11">
+                <div class="col-md-11">
                   <label class="form-control-label">Montant</label>
                   <input type="number" class="form-control" name="montant" value="{{ $impaye->reste }}">
                 </div>
@@ -62,7 +62,7 @@
             </div>
 
             <div class="row d-flex justify-content-center align-items-center pt-4 ps-4 pb-4 pe-4">
-              <div class="col-lg-6 text-center">
+              <div class="col-md-6 text-center">
                 <button type="submit" class="btn bg-gradient-primary w-100 mb-0">Payer </button>
               </div>
             </div>

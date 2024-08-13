@@ -10,6 +10,75 @@ use App\Models\Generic;
 class ValidationController extends Controller
 {
 
+    public function traitementCheque(){
+        $dateversement = request('dateversement');
+        $datedispo = request('datedispo');
+        $idpaiement = request('idpaiement');
+        
+        if( isset($dateversement) ){
+            $data['dateversement'] = $dateversement;
+        }
+        else{
+            $data['datedispo'] = $datedispo;
+        }        
+        
+        $id["name"] = "idpaiement";
+        $id["value"] = $idpaiement;
+        Generic::updatin("paiement", $id, $data);
+
+        return redirect()->action([ValidationController::class, 'listCheque']);
+    }
+
+    public function modifCheque($id)  {
+        $cheque = Generic::select('v_etat_cheque', "*", [ ['idpaiement', "=", $id] ], [], "datepaiement", "desc")->first();
+
+        return view('validation.modifCheque', ["cheque" => $cheque, 'nomPage' => 'Modification du chèque']);
+    }
+
+    public function filtreCheque()  {
+        $clients = Generic::select('client')->get();
+        $lieux = Generic::select('v_lieuclient')->get();
+        $mois = Generic::select('mois')->get();
+        $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
+        
+        $conditions = [ ["etat", "!=", "3"] ];
+        $datepaiement = request('datepaiement');
+        $idclient = request('idclient');
+        $idinfoclient = request('idlieu');
+        $annee = request("annee");
+        $idmois = request("idmois");
+        
+        if (!empty($datepaiement)) {
+            $conditions[] = ["datepaiement", "=", $datepaiement];
+        }
+        if (!empty($idclient)) {
+            $conditions[] = ["idclient", "=", $idclient];
+        }
+        if (!empty($idinfoclient)) {
+            $conditions[] = ["idinfoclient", "=", $idinfoclient];
+        }
+        if (!empty($annee)) {
+            $conditions[] = ["annee", "=", $annee];
+        }
+        if (!empty($idmois)) {
+            $conditions[] = ["idmois", "=", $idmois];
+        }
+        $cheques = Generic::select('v_etat_cheque', "*", $conditions, [], "datepaiement", "desc")->get();
+
+        return view('validation.listCheque', ['annees' => $annees, 'mois' => $mois, "lieux" => $lieux, 'clients' => $clients, 'cheques' => $cheques, 'nomPage' => 'Liste des chèques']);
+    }    
+
+    public function listCheque()  {
+        $clients = Generic::select('client')->get();
+        $lieux = Generic::select('v_lieuclient')->get();
+        $mois = Generic::select('mois')->get();
+        $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
+        
+        $cheques = Generic::select('v_etat_cheque', "*", [ ["etat", "!=", "3"] ], [], "datepaiement", "desc")->get();
+
+        return view('validation.listCheque', ['annees' => $annees, 'mois' => $mois, "lieux" => $lieux, 'clients' => $clients, 'cheques' => $cheques, 'nomPage' => 'Liste des chèques']);
+    }
+
     public function pagePaiement($id)  {
         $modes = Generic::select('modepaiement')->get();
         $banques = Generic::select('banque')->get();
@@ -21,13 +90,13 @@ class ValidationController extends Controller
     public function filtreImpaye()  {
         $clients = Generic::select('client')->get();
         $modes = Generic::select('modepaiement')->get();
-        $lieux = Generic::select('lieu')->get();
+        $lieux = Generic::select('v_lieuclient')->get();
         $banques = Generic::select('banque')->get();
         
         $conditions = [ ["reste", ">", 0] ];
         $datevente = request('datevente');
         $idclient = request('idclient');
-        $idlieu = request('idlieu');
+        $idinfoclient = request('idlieu');
         
         if (!empty($datevente)) {
             $conditions[] = ["datevente", "=", $datevente];
@@ -35,8 +104,8 @@ class ValidationController extends Controller
         if (!empty($idclient)) {
             $conditions[] = ["idclient", "=", $idclient];
         }
-        if (!empty($idlieu)) {
-            $conditions[] = ["idlieu", "=", $idlieu];
+        if (!empty($idinfoclient)) {
+            $conditions[] = ["idinfoclient", "=", $idinfoclient];
         }
         $impayes = Generic::select('v_paiement', "*", $conditions, [], "datevente", "desc")->get();
 
@@ -46,7 +115,7 @@ class ValidationController extends Controller
     public function listFactureImpaye()  {
         $clients = Generic::select('client')->get();
         $modes = Generic::select('modepaiement')->get();
-        $lieux = Generic::select('lieu')->get();
+        $lieux = Generic::select('v_lieuclient')->get();
         $banques = Generic::select('banque')->get();
         
         $impayes = Generic::select('v_paiement', "*", [ ["reste", ">", 0] ], [], "datevente", "desc")->get();
@@ -60,13 +129,13 @@ class ValidationController extends Controller
         $montant = request('montant');
         $idvente = request('idvente');
         
-        if(request('idbanque') == "2"){ // cheque
+        if(request('idmodepaiement') == "2"){ // cheque
             $data['idbanque'] = request('idbanque');
             $data['nom'] = request('nom');
             $data['numero'] = request('numero');
             $data['datecreation'] = request('datecreation');
         }
-        else if(request('idbanque') == "3"){  //virement
+        else if(request('idmodepaiement') == "4"){  //virement
             $data['idbanque'] = request('idbanque');
         }
         
@@ -99,13 +168,13 @@ class ValidationController extends Controller
                 'montant' => $montant,
                 'datesaisie' => date('Y-m-d')
             ];        
-            if(request('idbanque') == "2"){ // cheque
+            if(request('idmodepaiement') == "2"){ // cheque
                 $data['idbanque'] = request('idbanque');
                 $data['nom'] = request('nom');
                 $data['numero'] = request('numero');
                 $data['datecreation'] = request('datecreation');
             }
-            else if(request('idbanque') == "3"){  //virement
+            else if(request('idmodepaiement') == "4"){  //virement
                 $data['idbanque'] = request('idbanque');
             }
             Generic::insert('paiement', $data);
@@ -117,19 +186,19 @@ class ValidationController extends Controller
     public function validationEchange()  {
         $echanges = Generic::select('v_echange_non_valide', "*", [], [], "dateechange", "desc")->get();
         $clients = Generic::select('client')->get();
-        $lieux = Generic::select('lieu')->get();
+        $lieux = Generic::select('v_lieuclient')->get();
 
         return view('validation.validationEchange', ["lieux" => $lieux, 'clients' => $clients, 'echanges' => $echanges, 'nomPage' => 'Validation échange']);
     }
 
     public function filtrevalidationEchange()  {
         $clients = Generic::select('client')->get();
-        $lieux = Generic::select('lieu')->get();
+        $lieux = Generic::select('v_lieuclient')->get();
         
         $conditions = [];
         $dateechange = request('dateechange');
         $idclient = request('idclient');
-        $idlieu = request('idlieu');
+        $idinfoclient = request('idlieu');
         
         if (!empty($dateechange)) {
             $conditions[] = ["dateechange", "=", $dateechange];
@@ -137,8 +206,8 @@ class ValidationController extends Controller
         if (!empty($idclient)) {
             $conditions[] = ["idclient", "=", $idclient];
         }
-        if (!empty($idlieu)) {
-            $conditions[] = ["idlieu", "=", $idlieu];
+        if (!empty($idinfoclient)) {
+            $conditions[] = ["idinfoclient", "=", $idinfoclient];
         }
         $echanges = Generic::select('v_echange_non_valide', "*", $conditions, [], "dateechange", "desc")->get();
         
@@ -201,19 +270,33 @@ class ValidationController extends Controller
         $ventes = Generic::select('v_vente_non_valide', "*", [], [], "datevente", "desc")->get();
         $clients = Generic::select('client')->get();
         $lieux = Generic::select('v_lieuclient')->get();
+        $responsables = Generic::select('responsable')->get();
+        $mois = Generic::select('mois')->get();
+        $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
 
-        return view('validation.validationVente', ["lieux" => $lieux, 'clients' => $clients, 'ventes' => $ventes, 'nomPage' => 'Validation vente']);
+        $total = Generic::select('v_vente_non_valide', DB::raw('sum(total) as total'))->first()->total;
+
+        return view('validation.validationVente', ['total' => $total, 'mois' => $mois, 'annees' => $annees, 'responsables' => $responsables, "lieux" => $lieux, 'clients' => $clients, 'ventes' => $ventes, 'nomPage' => 'Validation vente']);
     }
 
     public function filtrevalidationVente()  {
         $clients = Generic::select('client')->get();
-        $lieux = Generic::select('lieu')->get();
+        $lieux = Generic::select('v_lieuclient')->get();
+        $responsables = Generic::select('responsable')->get();
+        $mois = Generic::select('mois')->get();
+        $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
         
         $conditions = [];
         $datevente = request('datevente');
         $idclient = request('idclient');
         $idinfoclient = request('idlieu');
+        $responsable = request('responsable');
+        $annee = request('annee');
+        $idmois = request('idmois');
         
+        if (!empty($responsable)) {
+            $conditions[] = ["responsable", "=", $responsable];
+        }
         if (!empty($datevente)) {
             $conditions[] = ["datevente", "=", $datevente];
         }
@@ -223,9 +306,16 @@ class ValidationController extends Controller
         if (!empty($idinfoclient)) {
             $conditions[] = ["idinfoclient", "=", $idinfoclient];
         }
+        if (!empty($annee)) {
+            $conditions[] = ["annee", "=", $annee];
+        }
+        if (!empty($idmois)) {
+            $conditions[] = ["idmois", "=", $idmois];
+        }
         $ventes = Generic::select('v_vente_non_valide', "*", $conditions, [], "datevente", "desc")->get();
+        $total = Generic::select('v_vente_non_valide', DB::raw('sum(total) as total'), $conditions)->first()->total;
         
-        return view('validation.validationVente', ["lieux" => $lieux, 'clients' => $clients, 'ventes' => $ventes, 'nomPage' => 'Validation vente']);
+        return view('validation.validationVente', ['total' => $total, 'mois' => $mois, 'annees' => $annees, 'responsables' => $responsables, "lieux" => $lieux, 'clients' => $clients, 'ventes' => $ventes, 'nomPage' => 'Validation vente']);
     }
 
     public function traitementvalidationVente(){

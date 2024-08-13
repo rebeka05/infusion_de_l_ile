@@ -2,16 +2,16 @@
 <form action="{{ route('filtreEtatLivraison') }}" method="get">
 @csrf
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 mt-5">
     <div class="row">
         <div class="col-10">
         
           <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-lg-2 mb-3">
+            <div class="col-md-2 mb-3">
                 <label class="form-control-label">Date de livraison</label>
                 <input type="date" class="form-control" name="datesortie">
             </div>
-            <div class="col-lg-1 mb-3">
+            <div class="col-md-1 mb-3">
               <input type="submit" value="filtrer" class="btn btn-outline-primary btn-sm w-140 mt-4 mb-0">
             </div>
           </div>
@@ -25,12 +25,12 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="col-lg-2 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Produit</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Nombre</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Vendu</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">échange</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">dégustation</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Reste</th>
+                      <th class="col-md-2 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Produit</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Nombre</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Vendu</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">échange</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">dégustation</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Reste</th>
                     </tr>
                   </thead>
                   <tbody>

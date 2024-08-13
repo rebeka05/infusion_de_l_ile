@@ -2,12 +2,12 @@
 <form action="{{ route('filtretotalProduit') }}" method="get">
 @csrf
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 mt-5">
     <div class="row">
         <div class="col-10">
         
           <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-lg-5 mb-3">
+            <div class="col-md-5 mb-3">
               <label class="form-control-label">Produit</label>
               <select class="form-control" name="idinfoproduit">
               @foreach ($produits as $produit)
@@ -15,7 +15,7 @@
               @endforeach
               </select>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-md-2 mb-3">
                 <label class="form-control-label">Année</label>
                 <select class="form-control" name="annee">
                 @foreach ($annees as $annee)
@@ -23,7 +23,7 @@
                 @endforeach
                 </select>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-md-2 mb-3">
                 <label class="form-control-label">Mois</label>
                 <select class="form-control" name="idmois">
                 @foreach ($mois as $m)
@@ -31,7 +31,7 @@
                 @endforeach
                 </select>
             </div>
-            <div class="col-lg-1 mb-3">
+            <div class="col-md-1 mb-3">
               <input type="submit" value="filtrer" class="btn btn-outline-primary btn-sm w-140 mt-4 mb-0">
             </div>
           </div>
@@ -45,10 +45,10 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="col-lg-6 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Entité</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">PU</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Qte</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Montant</th>
+                      <th class="col-md-6 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Entité</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">PU</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Qte</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Montant</th>
                     </tr>
                   </thead>
                   <tbody>

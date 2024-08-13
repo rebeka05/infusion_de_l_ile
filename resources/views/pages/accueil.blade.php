@@ -1,6 +1,6 @@
 @include('template.header')  
 
-<div class="container-fluid py-4" style="">
+<div class="container-fluid py-4 mt-5" style="">
     <div class="row mt-5">
     <div class="col-md-10 mb-lg-0 mb-4">
     <div class="row gx-3"> <!-- Ajout de la classe gx-3 pour ajuster l'espacement horizontal -->

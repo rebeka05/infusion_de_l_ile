@@ -2,19 +2,19 @@
 <form action="{{ route('traitementLivraison') }}" method="post">
     @csrf
 
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4 mt-5">
 
         <div class="row mt-5">
         <!-- <div class="row mt-2 d-flex justify-content-center align-items-center"> -->
 
-            <div class="col-lg-10 mb-lg-0 mb-4">
+            <div class="col-md-10 mb-lg-0 mb-4">
                 <div class="card">
 
                     <div class="card-body p-4">
 
                         <div class="row">
 
-                            <div class="col-lg-3">
+                            <div class="col-md-3">
                                 <label class="form-control-label">Date de livraison</label>
                                 <input type="date" class="form-control" name="date" value="{{ $date }}">
                             </div>
@@ -28,10 +28,10 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="col-lg-6 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th class="col-md-6 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         Produit
                                     </th>
-                                    <th class="col-lg-2 text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    <th class="col-md-2 text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Qte
                                     </th>
                                     <th></th>
@@ -60,7 +60,7 @@
                             </table>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1">
+                            <div class="col-md-1">
                                 <div class="nav-link add-row">
                                     <div
                                         class="icon icon-shape icon-sm shadow border-radius-md bg-gradient-primary text-center ms-2">
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="row d-flex justify-content-center align-items-center ps-4 pb-4 pe-4">
-                        <div class="col-lg-6 text-center">
+                        <div class="col-md-6 text-center">
                             <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0">Entrer</button>
                         </div>
                     </div>

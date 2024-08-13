@@ -35,6 +35,7 @@ foreach ($moisArray as $moisItem) {
 }
 
 // chart 4
+$labels4 = $labels;
 $etatArray = $etats->toArray();
 $clientsData = [];
 foreach ($etatArray as $etat) {
@@ -71,7 +72,7 @@ $maxValue = 1000000;
 
 @include('template.header')  
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 mt-5">
       <div class="col-10">
         
         <div class="card">
@@ -79,7 +80,7 @@ $maxValue = 1000000;
 
             <div class="card-body col-6">
               <div class="row">
-                <div class="col-lg-3">
+                <div class="col-md-3">
                   <label class="form-control-label">Année</label>
                   <select class="form-control" id="annee1" onchange="updateChart1()">
                   @foreach ($annees as $annee)
@@ -87,7 +88,7 @@ $maxValue = 1000000;
                   @endforeach
                   </select>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-md-3">
                     <label class="form-control-label">Entité</label>
                     <select class="form-control" id="idclient1" onchange="updateChart1()">
                       <option value=""> Tous </option>
@@ -96,7 +97,7 @@ $maxValue = 1000000;
                     @endforeach
                     </select>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-md-3">
                   <label class="form-control-label">Lieu</label>
                   <select class="form-control" id="idlieu1" onchange="updateChart1()">
                     <option value=""> Tous </option>
@@ -116,7 +117,7 @@ $maxValue = 1000000;
 
             <div class="card-body col-6">
               <div class="row">
-                <div class="col-lg-3">
+                <div class="col-md-3">
                   <label class="form-control-label">Année</label>
                   <select class="form-control" id="annee2" onchange="updateChart2()">
                   @foreach ($annees as $annee)
@@ -124,7 +125,7 @@ $maxValue = 1000000;
                   @endforeach
                   </select>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-md-9">
                     <label class="form-control-label">Produit</label>
                     <select class="form-control" id="idproduit2" onchange="updateChart2()">
                     @foreach ($produits as $produit)
@@ -143,7 +144,7 @@ $maxValue = 1000000;
 
             <div class="card-body col-6">
               <div class="card-body row">
-                <div class="col-lg-2">
+                <div class="col-md-2">
                   <label class="form-control-label">Année</label>
                   <select class="form-control" id="annee3" onchange="updateChart3()">
                   @foreach ($annees as $annee)
@@ -151,7 +152,7 @@ $maxValue = 1000000;
                   @endforeach
                   </select>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-md-3">
                     <label class="form-control-label">Mois</label>
                     <select class="form-control" id="idmois3" onchange="updateChart3()">
                     @foreach ($mois as $m)
@@ -159,7 +160,7 @@ $maxValue = 1000000;
                     @endforeach
                     </select>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-md-3">
                     <label class="form-control-label">Entité</label>
                     <select class="form-control" id="idclient3" onchange="updateChart3()">
                     @foreach ($clients as $client)
@@ -167,7 +168,7 @@ $maxValue = 1000000;
                     @endforeach
                     </select>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-md-3">
                   <label class="form-control-label">Lieu</label>
                   <select class="form-control" id="idlieu3" onchange="updateChart3()">
                     <option value=""> Tous </option>
@@ -187,7 +188,7 @@ $maxValue = 1000000;
 
             <div class="card-body col-6">
               <div class="card-body row">
-                <div class="col-lg-2">
+                <div class="col-md-2">
                   <label class="form-control-label">Année</label>
                   <select class="form-control" id="annee4"  onchange="updateChart4()">
                   @foreach ($annees as $annee)
@@ -195,7 +196,7 @@ $maxValue = 1000000;
                   @endforeach
                   </select>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-md-3">
                     <label class="form-control-label">Tri par</label>
                     <select class="form-control" id="type4"  onchange="updateChart4()">
                       <option value="1"> Entité </option>
@@ -366,7 +367,7 @@ $maxValue = 1000000;
             var chart4 = new Chart(ctx4, {
                 type: 'bar',
                 data: {
-                    labels: <?php echo json_encode($labels); ?>,
+                    labels: <?php echo json_encode($labels4); ?>,
                     datasets: <?php echo json_encode($datas4); ?>
                 },
                 options: {

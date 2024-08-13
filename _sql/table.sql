@@ -1,3 +1,8 @@
+create database infusion;
+\c infusion
+
+SET client_encoding TO 'UTF8';
+
 create table personnel(
     idpersonnel serial primary key,
     login varchar,
@@ -107,6 +112,8 @@ create table paiement(
     datecreation date,
     datesaisie date
 );
+alter table paiement add column dateversement date;
+alter table paiement add column datedispo date;
 
 create table echange(
     idechange serial primary key,

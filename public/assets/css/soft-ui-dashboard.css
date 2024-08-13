@@ -4771,6 +4771,31 @@ fieldset:disabled .btn {
   padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
 }
 
+.navbar {
+  position: fixed;
+  width: 83%;
+  backdrop-filter: blur(10px);
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.submenu {
+  display: none;
+  padding-left: 20px;
+}
+
+.submenu.show {
+  display: block;
+}
+
+.nav-item {
+  list-style-type: none;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .navbar>.container,
 .navbar>.container-fluid,
 .navbar>.container-sm,

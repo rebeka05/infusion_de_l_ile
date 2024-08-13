@@ -53,6 +53,11 @@ Route::post('/multiPaiement', [ValidationController::class,'multiPaiement'])->na
 Route::get('/pagePaiement/{id}', [ValidationController::class,'pagePaiement'])->name("pagePaiement");
 Route::post('/traitementPaiement', [ValidationController::class,'traitementPaiement'])->name("traitementPaiement");
 
+Route::get('/filtreCheque', [ValidationController::class,'filtreCheque'])->name("filtreCheque");
+Route::get('/listCheque', [ValidationController::class,'listCheque'])->name("listCheque");
+Route::post('/traitementCheque', [ValidationController::class,'traitementCheque'])->name("traitementCheque");
+Route::get('/modifCheque/{id}', [ValidationController::class,'modifCheque'])->name("modifCheque");
+
 Route::get('/validationEchange', [ValidationController::class,'validationEchange'])->name("validationEchange");
 Route::post('/traitementvalidationEchange', [ValidationController::class,'traitementvalidationEchange'])->name("traitementvalidationEchange");
 Route::get('/filtrevalidationEchange', [ValidationController::class,'filtrevalidationEchange'])->name("filtrevalidationEchange");
@@ -68,11 +73,14 @@ Route::get('/venteValide', [AdminController::class,'venteValide'])->name("venteV
 Route::get('/filtreventeValide', [AdminController::class,'filtreventeValide'])->name("filtreventeValide");
 Route::get('/detailsvente/{id}', [AdminController::class,'detailsvente'])->name("detailsvente");
 
-Route::get('/venteNonValide', [AdminController::class,'venteNonValide'])->name("venteNonValide");
-Route::get('/filtreventeNonValide', [AdminController::class,'filtreventeNonValide'])->name("filtreventeNonValide");
+// Route::get('/venteNonValide', [AdminController::class,'venteNonValide'])->name("venteNonValide");
+// Route::get('/filtreventeNonValide', [AdminController::class,'filtreventeNonValide'])->name("filtreventeNonValide");
 
 Route::get('/listePaiement', [AdminController::class,'listePaiement'])->name("listePaiement");
 Route::get('/filtrelistePaiement', [AdminController::class,'filtrelistePaiement'])->name("filtrelistePaiement");
+
+Route::get('/etatCheque', [AdminController::class,'etatCheque'])->name("etatCheque");
+Route::get('/filtreetatCheque', [AdminController::class,'filtreetatCheque'])->name("filtreetatCheque");
 
 Route::get('/venteNonPaye', [AdminController::class,'venteNonPaye'])->name("venteNonPaye");
 Route::get('/filtreventeNonPaye', [AdminController::class,'filtreventeNonPaye'])->name("filtreventeNonPaye");

@@ -9,6 +9,54 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
+    public function filtreetatCheque()  {
+        $clients = Generic::select('client')->get();
+        $lieux = Generic::select('v_lieuclient')->get();
+        $mois = Generic::select('mois')->get();
+        $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
+        
+        $conditions = [];
+        $datepaiement = request('datepaiement');
+        $idclient = request('idclient');
+        $idinfoclient = request('idlieu');
+        $annee = request("annee");
+        $idmois = request("idmois");
+        $etat = request("etat");
+        
+        if (!empty($datepaiement)) {
+            $conditions[] = ["datepaiement", "=", $datepaiement];
+        }
+        if (!empty($etat)) {
+            $conditions[] = ["etat", "=", $etat];
+        }
+        if (!empty($idclient)) {
+            $conditions[] = ["idclient", "=", $idclient];
+        }
+        if (!empty($idinfoclient)) {
+            $conditions[] = ["idinfoclient", "=", $idinfoclient];
+        }
+        if (!empty($annee)) {
+            $conditions[] = ["annee", "=", $annee];
+        }
+        if (!empty($idmois)) {
+            $conditions[] = ["idmois", "=", $idmois];
+        }
+        $cheques = Generic::select('v_etat_cheque', "*", $conditions, [], "datepaiement", "desc")->get();
+
+        return view('pageadmin.etatCheque', ['annees' => $annees, 'mois' => $mois, "lieux" => $lieux, 'clients' => $clients, 'cheques' => $cheques, 'nomPage' => 'Liste des chèques']);
+    }    
+
+    public function etatCheque()  {
+        $clients = Generic::select('client')->get();
+        $lieux = Generic::select('v_lieuclient')->get();
+        $mois = Generic::select('mois')->get();
+        $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
+        
+        $cheques = Generic::select('v_etat_cheque', "*", [], [], "datepaiement", "desc")->get();
+
+        return view('pageadmin.etatCheque', ['annees' => $annees, 'mois' => $mois, "lieux" => $lieux, 'clients' => $clients, 'cheques' => $cheques, 'nomPage' => 'Liste des chèques']);
+    }
+
     public function etatechange(){
         $echanges = Generic::select('v_etatechange')->get();
         $mois = Generic::select('mois')->get();
@@ -78,14 +126,14 @@ class AdminController extends Controller
     }
 
     public function filtreEtatLivraison(Request $request) {
-        $datesortie = $request->query('datesortie');;
+        $datesortie = $request->query('datesortie');
         $ventes = Generic::select('v_etatlivraison', ['*'], [["datesortie", "=", $datesortie]])->get();
 
         return view('pageadmin.etatLivraison', ['datesortie' => $datesortie, 'ventes' => $ventes, 'nomPage' => 'Etat de livraison par date']);
     }
 
     public function etatLivraison()  {
-        $datesortie = '2024-07-06';
+        $datesortie = date('Y-m-d');
         $ventes = Generic::select('v_etatlivraison', ['*'], [["datesortie", "=", $datesortie]])->get();
 
         return view('pageadmin.etatLivraison', ['datesortie' => $datesortie, 'ventes' => $ventes, 'nomPage' => 'Etat de livraison par date']);
@@ -153,6 +201,7 @@ class AdminController extends Controller
         $etat_entites = Generic::select('v_etat_vente_mensuel_entite', ['datevente', DB::raw('SUM(total) AS total')], [ ["annee", "=", $annees[0]->annee], ["idmois", "=", $mois[0]->idmois], ["idclient", "=", $clients[0]->idclient] ], [], 'datevente', 'ASC', ['datevente'])->get();
         
         $etats = Generic::select('v_etatentite_annuel', ['*'], [ ["annee", "=", $annees[0]->annee] ], [], 'idmois', 'ASC')->get();
+        // $etats = Generic::select('v_etatproduit_annuel', ['*'], [ ["annee", "=", $annees[0]->annee] ], [], 'idmois', 'ASC')->get();
 
         $m = $mois[0]->idmois;
         $a = $annees[0]->annee;
@@ -266,57 +315,56 @@ class AdminController extends Controller
         return view('pageadmin.listePaiement', ['total' => $total, 'mois' => $mois, 'annees' => $annees, 'modepaiements' => $modepaiements, 'paiements' => $paiements, "lieux" => $lieux, 'clients' => $clients, 'nomPage' => 'Liste des paiements']);
     }
 
-    public function venteNonValide()  {
-        $ventes = Generic::select('v_vente_non_valide')->get();
-        $clients = Generic::select('client')->get();
-        $lieux = Generic::select('lieu')->get();
-        $responsables = Generic::select('responsable')->get();
-        $mois = Generic::select('mois')->get();
-        $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
+    // public function venteNonValide()  {
+    //     $ventes = Generic::select('v_vente_non_valide')->get();
+    //     $clients = Generic::select('client')->get();
+    //     $lieux = Generic::select('lieu')->get();
+    //     $responsables = Generic::select('responsable')->get();
+    //     $mois = Generic::select('mois')->get();
+    //     $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
 
-        $total = Generic::select('v_vente_non_valide', DB::raw('sum(total) as total'))->first()->total;
+    //     $total = Generic::select('v_vente_non_valide', DB::raw('sum(total) as total'))->first()->total;
 
-        return view('pageadmin.venteNonValide', ['total' => $total, 'mois' => $mois, 'annees' => $annees, 'responsables' => $responsables, 'ventes' => $ventes, "lieux" => $lieux, 'clients' => $clients, 'nomPage' => 'Liste des ventes non validés']);
-    }
-
-    public function filtreventeNonValide()  {
-        $clients = Generic::select('client')->get();
-        $lieux = Generic::select('lieu')->get();
-        $responsables = Generic::select('responsable')->get();
-        $mois = Generic::select('mois')->get();
-        $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
+    //     return view('pageadmin.venteNonValide', ['total' => $total, 'mois' => $mois, 'annees' => $annees, 'responsables' => $responsables, 'ventes' => $ventes, "lieux" => $lieux, 'clients' => $clients, 'nomPage' => 'Liste des ventes non validés']);
+    // }
+    // public function filtreventeNonValide()  {
+    //     $clients = Generic::select('client')->get();
+    //     $lieux = Generic::select('lieu')->get();
+    //     $responsables = Generic::select('responsable')->get();
+    //     $mois = Generic::select('mois')->get();
+    //     $annees = Generic::select('vente', DB::raw('distinct extract(year from datevente) as annee'))->get();
         
-        $conditions = [ ];
-        $responsable = request('responsable');
-        $idclient = request('idclient');
-        $idlieu = request('idlieu');
-        $datevente = request('datevente');
-        $annee = request('annee');
-        $idmois = request('idmois');
+    //     $conditions = [ ];
+    //     $responsable = request('responsable');
+    //     $idclient = request('idclient');
+    //     $idlieu = request('idlieu');
+    //     $datevente = request('datevente');
+    //     $annee = request('annee');
+    //     $idmois = request('idmois');
         
-        if (!empty($responsable)) {
-            $conditions[] = ["responsable", "=", $responsable];
-        }
-        if (!empty($datevente)) {
-            $conditions[] = ["datevente", "=", $datevente];
-        }
-        if (!empty($idclient)) {
-            $conditions[] = ["idclient", "=", $idclient];
-        }
-        if (!empty($idlieu)) {
-            $conditions[] = ["idlieu", "=", $idlieu];
-        }
-        if (!empty($annee)) {
-            $conditions[] = ["annee", "=", $annee];
-        }
-        if (!empty($idmois)) {
-            $conditions[] = ["idmois", "=", $idmois];
-        }
-        $ventes = Generic::select('v_vente_non_valide', "*", $conditions, [], "datevente", "desc")->get();
-        $total = Generic::select('v_vente_non_valide', DB::raw('sum(total) as total'), $conditions)->first()->total;
+    //     if (!empty($responsable)) {
+    //         $conditions[] = ["responsable", "=", $responsable];
+    //     }
+    //     if (!empty($datevente)) {
+    //         $conditions[] = ["datevente", "=", $datevente];
+    //     }
+    //     if (!empty($idclient)) {
+    //         $conditions[] = ["idclient", "=", $idclient];
+    //     }
+    //     if (!empty($idlieu)) {
+    //         $conditions[] = ["idlieu", "=", $idlieu];
+    //     }
+    //     if (!empty($annee)) {
+    //         $conditions[] = ["annee", "=", $annee];
+    //     }
+    //     if (!empty($idmois)) {
+    //         $conditions[] = ["idmois", "=", $idmois];
+    //     }
+    //     $ventes = Generic::select('v_vente_non_valide', "*", $conditions, [], "datevente", "desc")->get();
+    //     $total = Generic::select('v_vente_non_valide', DB::raw('sum(total) as total'), $conditions)->first()->total;
 
-        return view('pageadmin.venteNonValide', ['total' => $total, 'mois' => $mois, 'annees' => $annees, 'responsables' => $responsables, 'ventes' => $ventes, "lieux" => $lieux, 'clients' => $clients, 'nomPage' => 'Liste des ventes non validés']);
-    }
+    //     return view('pageadmin.venteNonValide', ['total' => $total, 'mois' => $mois, 'annees' => $annees, 'responsables' => $responsables, 'ventes' => $ventes, "lieux" => $lieux, 'clients' => $clients, 'nomPage' => 'Liste des ventes non validés']);
+    // }
 
     public function detailsvente($id)  {
         $vente = Generic::select('vente', '*', [ ['idvente' , '=', $id] ])->first();

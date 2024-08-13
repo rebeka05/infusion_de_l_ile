@@ -2,19 +2,19 @@
 <form action="{{ route('updateVente') }}" method="post">
     @csrf
 
-    <div class="container-fluid py-4" style="">
+    <div class="container-fluid py-4 mt-5">
 
         <!-- <div class="row mt-2 d-flex justify-content-center align-items-center"> -->
         <div class="row mt-5">
 
-            <div class="col-lg-10 mb-lg-0 mb-4">
+            <div class="col-md-10 mb-lg-0 mb-4">
                 <div class="card">
 
                     <div class="card-body p-4">
 
                         <div class="row">
 
-                            <div class="col-lg-3 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label class="form-control-label">Date de livraison</label>
                                 <input type="date" class="form-control" value="{{ $vente->datevente }}" disabled>
                                 <input type="hidden" name="idvente" value="{{ $vente->idvente }}">
@@ -24,32 +24,32 @@
 
                         <div class="row">
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Numéro de bon de commande</label>
                                 <input type="text" class="form-control" value="{{ $vente->nbdc }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Facture</label>
                                 <input type="text" class="form-control" value="{{ $vente->ref }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Client</label>
                                 <input type="text" class="form-control" value="{{ $client->entite }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Lieu</label>
                                 <input type="text" class="form-control" value="{{ $client->nom }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Responsable</label>
                                 <input type="text" class="form-control" value="{{ $vente->responsable }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Contact</label>
                                 <input type="text" class="form-control" value="{{ $vente->contact }}" disabled>
                             </div>
@@ -62,19 +62,19 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="col-lg-4 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th class="col-md-4 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         Produit
                                     </th>
-                                    <th class="col-lg-2 text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    <th class="col-md-2 text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Date d'éxpiration
                                     </th>
-                                    <th class="col-lg-1 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th class="col-md-1 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         qte
                                     </th>
-                                    <th class="col-lg-2 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th class="col-md-2 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         pu
                                     </th>
-                                    <th class="col-lg-2 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th class="col-md-2 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         montant
                                     </th>
                                     <th></th>
@@ -122,7 +122,7 @@
                             </table>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1 ps-4 pt-2">
+                            <div class="col-md-1 ps-4 pt-2">
                                 <a class="nav-link add-row">
                                     <div
                                         class="icon icon-shape icon-sm shadow border-radius-md bg-gradient-primary text-center me-2">
@@ -132,9 +132,9 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-lg-7">
+                            <div class="col-md-7">
                             </div>
-                            <div class="col-lg-2 pt-2 ms-7">
+                            <div class="col-md-2 pt-2 ms-7">
                                 <div>
                                     <input type="number" class="form-control" value="{{ $totals }}" name="totals" id="totalSum" disabled>
                                 </div>
@@ -143,7 +143,7 @@
                     </div>
 
                     <div class="row d-flex justify-content-center align-items-center ps-4 pb-4 pe-4">
-                        <div class="col-lg-6 text-center">
+                        <div class="col-md-6 text-center">
                             <button type="submit" id="submitBtn" class="btn bg-gradient-primary w-100 mt-4 mb-0">Modifier</button>
                         </div>
                     </div>

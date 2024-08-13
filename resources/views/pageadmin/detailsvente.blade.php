@@ -1,18 +1,18 @@
 @include('template.header')
 
-    <div class="container-fluid py-4" style="">
+    <div class="container-fluid py-4  mt-5">
 
         <!-- <div class="row mt-2 d-flex justify-content-center align-items-center"> -->
         <div class="row mt-5">
 
-            <div class="col-lg-10 mb-lg-0 mb-4">
+            <div class="col-md-10 mb-lg-0 mb-4">
                 <div class="card">
 
                     <div class="card-body p-4">
 
                         <div class="row">
 
-                            <div class="col-lg-3 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label class="form-control-label">Date de livraison</label>
                                 <input type="date" class="form-control" value="{{ $vente->datevente }}" disabled>
                                 <input type="hidden" name="idvente" value="{{ $vente->idvente }}">
@@ -22,32 +22,32 @@
 
                         <div class="row">
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Numéro de bon de commande</label>
                                 <input type="text" class="form-control" value="{{ $vente->nbdc }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Facture</label>
                                 <input type="text" class="form-control" value="{{ $vente->ref }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Client</label>
                                 <input type="text" class="form-control" value="{{ $client->entite }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Lieu</label>
                                 <input type="text" class="form-control" value="{{ $client->nom }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Responsable</label>
                                 <input type="text" class="form-control" value="{{ $vente->responsable }}" disabled>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-control-label">Contact</label>
                                 <input type="text" class="form-control" value="{{ $vente->contact }}" disabled>
                             </div>
@@ -60,19 +60,19 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="col-lg-4 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    <th class="col-md-4 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Produit
                                     </th>
-                                    <th class="col-lg-2 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                    <th class="col-md-2 text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                         Date d'éxpiration
                                     </th>
-                                    <th class="col-lg-1 text-end text-uppercase text-secondary text-xs font-weight-bolder opacity-7 pe-2">
+                                    <th class="col-md-1 text-end text-uppercase text-secondary text-xs font-weight-bolder opacity-7 pe-2">
                                         qte
                                     </th>
-                                    <th class="col-lg-2 text-end text-uppercase text-secondary text-xs font-weight-bolder opacity-7 pe-2">
+                                    <th class="col-md-2 text-end text-uppercase text-secondary text-xs font-weight-bolder opacity-7 pe-2">
                                         pu
                                     </th>
-                                    <th class="col-lg-2 text-end text-uppercase text-secondary text-xs font-weight-bolder opacity-7 pe-2">
+                                    <th class="col-md-2 text-end text-uppercase text-secondary text-xs font-weight-bolder opacity-7 pe-2">
                                         montant
                                     </th>
                                 </tr>

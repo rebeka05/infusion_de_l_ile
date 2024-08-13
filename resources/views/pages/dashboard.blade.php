@@ -92,11 +92,11 @@
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-lg-7 mb-lg-0 mb-4">
+        <div class="col-md-7 mb-lg-0 mb-4">
           <div class="card">
             <div class="card-body p-3">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-md-6">
                   <div class="d-flex flex-column h-100">
                     <p class="mb-1 pt-2 text-bold">Built by developers</p>
                     <h5 class="font-weight-bolder">Soft UI Dashboard</h5>
@@ -107,7 +107,7 @@
                     </a>
                   </div>
                 </div>
-                <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                <div class="col-md-5 ms-auto text-center mt-5 mt-lg-0">
                   <div class="bg-gradient-primary border-radius-lg h-100">
                     <img src="../assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                     <div class="position-relative d-flex align-items-center justify-content-center h-100">
@@ -119,7 +119,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-md-5">
           <div class="card h-100 p-3">
             <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../assets/img/ivancik.jpg');">
               <span class="mask bg-gradient-dark"></span>
@@ -136,7 +136,7 @@
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-lg-5 mb-lg-0 mb-4">
+        <div class="col-md-5 mb-lg-0 mb-4">
           <div class="card z-index-2">
             <div class="card-body p-3">
               <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
@@ -252,7 +252,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-7">
+        <div class="col-md-7">
           <div class="card z-index-2">
             <div class="card-header pb-0">
               <h6>Sales overview</h6>
@@ -270,18 +270,18 @@
         </div>
       </div>
       <div class="row my-4">
-        <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+        <div class="col-md-8 col-md-6 mb-md-0 mb-4">
           <div class="card">
             <div class="card-header pb-0">
               <div class="row">
-                <div class="col-lg-6 col-7">
+                <div class="col-md-6 col-7">
                   <h6>Projects</h6>
                   <p class="text-sm mb-0">
                     <i class="fa fa-check text-info" aria-hidden="true"></i>
                     <span class="font-weight-bold ms-1">30 done</span> this month
                   </p>
                 </div>
-                <div class="col-lg-6 col-5 my-auto text-end">
+                <div class="col-md-6 col-5 my-auto text-end">
                   <div class="dropdown float-lg-end pe-4">
                     <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="fa fa-ellipsis-v text-secondary"></i>
@@ -544,7 +544,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-md-4 col-md-6">
           <div class="card h-100">
             <div class="card-header pb-0">
               <h6>Orders overview</h6>

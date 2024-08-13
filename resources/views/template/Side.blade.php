@@ -1,7 +1,7 @@
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs bg-white border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="#">
+      <a class="navbar-brand m-0" href="{{ route('accueil') }}">
         <img src="../assets/img/logo_ice_tea.png" class="navbar-brand-img h-200" alt="main_logo" width="100">
         <span class="ms-1 font-weight-bold">Infusion de l'île</span>
       </a>
@@ -21,42 +21,6 @@
       <ul class="navbar-nav">
 
         <li class="nav-item">
-          <a class="nav-link  " href="{{ route('venteValide') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="text-s fas fa-check text-primary text-center"></i></span>
-            </div>
-            <span class="nav-link-text ms-1 text-uppercase font-weight-bold">Vente validé</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link  " href="{{ route('venteNonValide') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="text-s fas fa-times text-primary text-center"></i></span>
-            </div>
-            <span class="nav-link-text ms-1 text-uppercase font-weight-bold">Vente non validé</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link  " href="{{ route('listePaiement') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="text-s fas fa-list text-primary text-center"></i></span>
-            </div>
-            <span class="nav-link-text ms-1 text-uppercase font-weight-bold">liste paiement</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link  " href="{{ route('venteNonPaye') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="text-s fas fa-money-bill-alt text-primary text-center"></i></span>
-            </div>
-            <span class="nav-link-text ms-1 text-uppercase font-weight-bold">état non payé</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link  " href="{{ route('etatLivraison') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="text-s fas fa-clipboard-list text-primary text-center"></i></span>
@@ -65,23 +29,78 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link  " href="{{ route('etatVente') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="text-s fas fa-chart-line text-primary text-center"></i></span>
-            </div>
-            <span class="nav-link-text ms-1 text-uppercase font-weight-bold">état de vente</span>
-          </a>
-        </li>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0);" onclick="toggleSubMenu('submenuVente')">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="text-s fas fa-store text-primary text-center"></i>
+              </div>
+              <span class="nav-link-text ms-1 text-uppercase font-weight-bold">Vente</span>
+            </a>
+            
+            <!-- Sous-menu -->
+            <ul id="submenuVente" class="submenu">
+              <li class="nav-item">
+                <a href="{{ route('venteValide') }}" class="nav-link">
+                  <i class="fas fa-check text-primary text-center"></i>
+                  <span class="nav-link-text ms-1 text-uppercase font-weight-bold">Vente validé</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('etatVente') }}" class="nav-link">
+                  <i class="fas fa-chart-line text-primary text-center"></i>
+                  <span class="nav-link-text ms-1 text-uppercase font-weight-bold">état de vente</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('etatVentePaye') }}" class="nav-link">
+                  <i class="fas fa-money-check text-primary text-center"></i>
+                  <span class="nav-link-text ms-1 text-uppercase font-weight-bold">état de vente payé</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
 
-        <li class="nav-item">
-          <a class="nav-link  " href="{{ route('etatVentePaye') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="text-s fas fa-money-check text-primary text-center"></i></span>
-            </div>
-            <span class="nav-link-text ms-1 text-uppercase font-weight-bold">état de vente payé</span>
-          </a>
-        </li>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0);" onclick="toggleSubMenu('submenuPaiement')">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="text-s fas fa-money-bills text-primary text-center"></i>
+              </div>
+              <span class="nav-link-text ms-1 text-uppercase font-weight-bold">paiement</span>
+            </a>
+            
+            <!-- Sous-menu -->
+            <ul id="submenuPaiement" class="submenu">
+              <li class="nav-item">
+                <a href="{{ route('listePaiement') }}" class="nav-link">
+                  <i class="fas fa-list text-primary text-center"></i>
+                  <span class="nav-link-text ms-1 text-uppercase font-weight-bold">liste paiement</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('venteNonPaye') }}" class="nav-link">
+                  <i class="fas fa-money-bill-alt text-primary text-center"></i>
+                  <span class="nav-link-text ms-1 text-uppercase font-weight-bold">état non payé</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('etatCheque') }}" class="nav-link">
+                  <i class="fas fa-university text-primary text-center"></i>
+                  <span class="nav-link-text ms-1 text-uppercase font-weight-bold">état des chèques</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <script>
+          function toggleSubMenu(id) {
+            var submenu = document.getElementById(id);
+            submenu.classList.toggle('show');
+          }
+        </script>
 
         <li class="nav-item">
           <a class="nav-link  " href="{{ route('venteProduitClient') }}">
@@ -213,6 +232,16 @@
                 </li>
               </ul>
             </li>
+            
+            <li class="nav-item d-xl-none ps-3 pe-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </a>
+            </li>
 
             <li class="nav-item d-flex align-items-center">
               <a href="{{ route('deconnexion') }}" class="nav-link text-body font-weight-bold px-0">
@@ -228,125 +257,119 @@
 
     
 
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 " style="margin-left: 72%;">
-    <div class="sidenav-header">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs bg-white border-0 border-radius-xl my-3 mt-7" style="margin-left: 72%;">
+        
+      <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <ul class="navbar-nav">
 
-    </div>
+          <li class="nav-item dropdown">
+            <a href="javascript:;" class="nav-link" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-check-circle text-primary text-center"></i></span>
+              <span class="nav-link-text ms-1 font-weight-bold text-uppercase">validation</span>
+            </a>
+            <ul> <!-- class="dropdown-menu" aria-labelledby="dropdownMenuButton" -->
+              <li class="nav-item dropdown-item">
+                <a class="nav-link" href="{{ route('validationVente') }}">
+                  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
+                    <i class="fas fa-store text-primary text-center"></i></span>
+                  </div>
+                  <span class="nav-link-text ms-1 text-uppercase">Vente</span>
+                </a>
+              </li>
+              
+              <li class="nav-item dropdown-item">
+                <a class="nav-link" href="{{ route('validationEchange') }}">
+                  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
+                    <i class="fas fa-exchange text-primary text-center"></i></span>
+                  </div>
+                  <span class="nav-link-text ms-1 text-uppercase">échange</span>
+                </a>
+              </li>
+              
+              <li class="nav-item dropdown-item">
+                <a class="nav-link" href="{{ route('listFactureImpaye') }}">
+                  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
+                    <i class="fas fa-money-bills text-primary text-center"></i></span>
+                  </div>
+                  <span class="nav-link-text ms-1 text-uppercase">Paiement</span>
+                </a>
+              </li>
+              
+              <li class="nav-item dropdown-item">
+                <a class="nav-link" href="{{ route('listCheque') }}">
+                  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
+                    <i class="fas fa-university text-primary text-center"></i></span>
+                  </div>
+                  <span class="nav-link-text ms-1 text-uppercase">Chèque</span>
+                </a>
+              </li>
 
-    <hr class="horizontal dark mt-0">
+            </ul>
+          </li>
 
-    
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-      <ul class="navbar-nav">
+        </ul>
+        
+        
+        
+        <ul class="navbar-nav">
 
-        <li class="nav-item">
-          <a class="nav-link  " href="{{ route('accueil') }}">
-            <!-- <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"> -->
-              <i class="text-s fas fa-home text-primary text-center"></i></span>
-            <!-- </div> -->
-            <span class="nav-link-text ms-1 text-uppercase font-weight-bold">Accueil</span>
-          </a>
-        </li>
+          <li class="nav-item dropdown">
+            <a href="javascript:;" class="nav-link" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-file-edit text-primary text-center"></i></span>
+              <span class="nav-link-text ms-1 font-weight-bold text-uppercase">saisie</span>
+            </a>
+            <ul> <!-- class="dropdown-menu" aria-labelledby="dropdownMenuButton" -->
 
-        <li class="nav-item dropdown">
-          <a href="javascript:;" class="nav-link" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-check-circle text-primary text-center"></i></span>
-            <span class="nav-link-text ms-1 font-weight-bold text-uppercase">validation</span>
-          </a>
-          <ul> <!-- class="dropdown-menu" aria-labelledby="dropdownMenuButton" -->
-            <li class="nav-item dropdown-item">
-              <a class="nav-link" href="{{ route('validationVente') }}">
-                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
-                  <i class="fas fa-store text-primary text-center"></i></span>
-                </div>
-                <span class="nav-link-text ms-1 text-uppercase">Vente</span>
-              </a>
-            </li>
-            
-            <li class="nav-item dropdown-item">
-              <a class="nav-link" href="{{ route('validationEchange') }}">
-                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
-                  <i class="fas fa-exchange text-primary text-center"></i></span>
-                </div>
-                <span class="nav-link-text ms-1 text-uppercase">échange</span>
-              </a>
-            </li>
-            
-            <li class="nav-item dropdown-item">
-              <a class="nav-link" href="{{ route('listFactureImpaye') }}">
-                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
-                  <i class="fas fa-money-bills text-primary text-center"></i></span>
-                </div>
-                <span class="nav-link-text ms-1 text-uppercase">Paiement</span>
-              </a>
-            </li>
+              <li class="nav-item dropdown-item">
+                <a class="nav-link" href="{{ route('saisie') }}">
+                  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
+                    <i class="fas fa-edit text-primary text-center"></i></span>
+                  </div>
+                  <span class="nav-link-text ms-1 text-uppercase">saisie</span>
+                </a>
+              </li>
 
-          </ul>
-        </li>
+              <li class="nav-item dropdown-item">
+                <a class="nav-link" href="{{ route('saisieLivraison') }}">
+                  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
+                    <i class="fas fa-truck text-primary text-center"></i></span>
+                  </div>
+                  <span class="nav-link-text ms-1 text-uppercase">livraison</span>
+                </a>
+              </li>
 
-      </ul>
-      
-      
-      
-      <ul class="navbar-nav">
+              <li class="nav-item dropdown-item">
+                <a class="nav-link" href="{{ route('pageVente') }}">
+                  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
+                    <i class="fas fa-store text-primary text-center"></i></span>
+                  </div>
+                  <span class="nav-link-text ms-1 text-uppercase">vente</span>
+                </a>
+              </li>
+              
+              <li class="nav-item dropdown-item">
+                <a class="nav-link" href="{{ route('pageEchange') }}">
+                  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
+                    <i class="fas fa-exchange text-primary text-center"></i></span>
+                  </div>
+                  <span class="nav-link-text ms-1 text-uppercase">échange</span>
+                </a>
+              </li>
+              
+              <li class="nav-item dropdown-item">
+                <a class="nav-link" href="{{ route('pageDegustation') }}">
+                  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
+                    <i class="fas fa-glass-whiskey text-primary text-center"></i></span>
+                  </div>
+                  <span class="nav-link-text ms-1 text-uppercase">dégustation</span>
+                </a>
+              </li>
 
-        <li class="nav-item dropdown">
-          <a href="javascript:;" class="nav-link" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-file-edit text-primary text-center"></i></span>
-            <span class="nav-link-text ms-1 font-weight-bold text-uppercase">saisie</span>
-          </a>
-          <ul> <!-- class="dropdown-menu" aria-labelledby="dropdownMenuButton" -->
+            </ul>
+          </li>
 
-            <li class="nav-item dropdown-item">
-              <a class="nav-link" href="{{ route('saisie') }}">
-                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
-                  <i class="fas fa-edit text-primary text-center"></i></span>
-                </div>
-                <span class="nav-link-text ms-1 text-uppercase">saisie</span>
-              </a>
-            </li>
+        </ul>
+      </div>
 
-            <li class="nav-item dropdown-item">
-              <a class="nav-link" href="{{ route('saisieLivraison') }}">
-                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
-                  <i class="fas fa-truck text-primary text-center"></i></span>
-                </div>
-                <span class="nav-link-text ms-1 text-uppercase">livraison</span>
-              </a>
-            </li>
-
-            <li class="nav-item dropdown-item">
-              <a class="nav-link" href="{{ route('pageVente') }}">
-                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
-                  <i class="fas fa-store text-primary text-center"></i></span>
-                </div>
-                <span class="nav-link-text ms-1 text-uppercase">vente</span>
-              </a>
-            </li>
-            
-            <li class="nav-item dropdown-item">
-              <a class="nav-link" href="{{ route('pageEchange') }}">
-                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
-                  <i class="fas fa-exchange text-primary text-center"></i></span>
-                </div>
-                <span class="nav-link-text ms-1 text-uppercase">échange</span>
-              </a>
-            </li>
-            
-            <li class="nav-item dropdown-item">
-              <a class="nav-link" href="{{ route('pageDegustation') }}">
-                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">                  
-                  <i class="fas fa-glass-whiskey text-primary text-center"></i></span>
-                </div>
-                <span class="nav-link-text ms-1 text-uppercase">dégustation</span>
-              </a>
-            </li>
-
-          </ul>
-        </li>
-
-      </ul>
-    </div>
-
-</aside>
+    </aside>
     <!-- End Navbar -->

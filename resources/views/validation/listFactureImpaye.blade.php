@@ -2,13 +2,13 @@
 <form action="{{ route('filtreImpaye') }}" method="get">
 @csrf
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 mt-5">
       <div class="row">
         <div class="col-10">
         
           <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-lg-2 mb-3">
-              <label class="form-control-label">Client</label>
+            <div class="col-md-2 mb-3">
+              <label class="form-control-label">Entité</label>
               <select class="form-control" name="idclient" id="idclient">
                 <option value=""> Tous </option>
               @foreach ($clients as $client)
@@ -16,20 +16,20 @@
               @endforeach
               </select>
             </div>
-            <div class="col-lg-2 mb-3">
-              <label class="form-control-label">Lieu</label>
+            <div class="col-md-2 mb-3">
+              <label class="form-control-label">Client</label>
               <select class="form-control" name="idlieu">
                 <option value=""> Tous </option>
               @foreach ($lieux as $lieu)
-                <option value="{{$lieu->idlieu}}"> {{$lieu->nom}} </option>
+                <option value="{{$lieu->idinfoclient}}"> {{$lieu->entite}} </option>
               @endforeach
               </select>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-md-2 mb-3">
               <label class="form-control-label">Date de livraison</label>
               <input type="date" class="form-control" name="datevente">
             </div>
-            <div class="col-lg-1 mb-3">
+            <div class="col-md-1 mb-3">
               <input type="submit" value="filtrer" class="btn btn-outline-primary btn-sm w-140 mt-4 mb-0">
             </div>
           </div>
@@ -40,11 +40,11 @@
           <div class="card mb-4">
           
             <div class="card-body mb-3 p-4"> <div class="row">
-              <div class="col-lg-2">
+              <div class="col-md-2">
                   <label class="form-control-label">Date de paiement</label>
                   <input type="date" class="form-control" name="date" value="{{ old('date') }}" required>
               </div>
-              <div class="col-lg-2">
+              <div class="col-md-2">
                   <label class="form-control-label">Mode de paiement</label>
                   <select class="form-control" name="idmodepaiement" id="idmodepaiement">
                   @foreach ($modes as $mode)
@@ -52,7 +52,7 @@
                   @endforeach
                   </select>
               </div>
-              <div class="col-lg-2" id="banqueDiv">
+              <div class="col-md-2" id="banqueDiv">
                 <label class="form-control-label">Banque</label>
                 <select class="form-control" name="idbanque" id="banqueSelect">
                     @foreach ($banques as $banque)
@@ -60,15 +60,15 @@
                     @endforeach
                 </select>
               </div>
-              <div class="col-lg-2" id="nomChequeDiv">
+              <div class="col-md-2" id="nomChequeDiv">
                   <label class="form-control-label">Nom du chèque</label>
                   <input type="text" class="form-control" name="nom">
               </div>
-              <div class="col-lg-2" id="numeroChequeDiv">
+              <div class="col-md-2" id="numeroChequeDiv">
                   <label class="form-control-label">Numéro du chèque</label>
                   <input type="text" class="form-control" name="numero">
               </div>
-              <div class="col-lg-2" id="dateChequeDiv">
+              <div class="col-md-2" id="dateChequeDiv">
                   <label class="form-control-label">Date du chèque</label>
                   <input type="date" class="form-control" name="datecreation">
               </div>
@@ -81,14 +81,14 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th></th>
-                      <th class="col-lg-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Date</th>
-                      <th class="col-lg-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ref</th>
-                      <th class="col-lg-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Client</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Montant</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Payé</th>
-                      <th class="col-lg-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Reste</th>
-                      <th class="col-lg-2"></th>
+                      <th> <input type="checkbox" id="check-all"> </th>
+                      <th class="col-md-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Date</th>
+                      <th class="col-md-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ref</th>
+                      <th class="col-md-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Client</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Montant</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Payé</th>
+                      <th class="col-md-2 text-end text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pe-2">Reste</th>
+                      <th class="col-md-2"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -127,14 +127,31 @@
             </div>
 
             <div class="row d-flex justify-content-center align-items-center ps-4 pb-4 pe-4">
-              <div class="col-lg-4 text-center">
+              <div class="col-md-4 text-center">
                   <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0">Payer</button>
               </div>
             </div>
 
         </div>
 
-          <script>
+          <script>        
+          
+            document.addEventListener('DOMContentLoaded', function() {
+              // Sélectionner le checkbox principal
+              var checkAll = document.getElementById('check-all');
+
+              // Ajouter un écouteur d'événements au checkbox principal
+              checkAll.addEventListener('change', function(e) {
+                  // Obtenir tous les checkboxes dans les <td> avec la classe .text-center
+                  var checkboxes = document.querySelectorAll('.check-box');
+
+                  // Parcourir chaque checkbox et lui appliquer l'état du checkbox principal
+                  checkboxes.forEach(function(checkbox) {
+                      checkbox.checked = e.target.checked;
+                  });
+              });
+            });
+
             document.addEventListener('DOMContentLoaded', function() {
                 const idModePaiement = document.getElementById('idmodepaiement');
                 const banqueDiv = document.getElementById('banqueDiv');
@@ -172,12 +189,21 @@
   
             document.getElementById('idclient').addEventListener('change', function () {
                 const clientId = this.value;
-                fetch('/getlieuxbyidclient?clientId=' + clientId)
-                    .then(response => response.json())
-                    .then(data => {
-                        updateLieuxSelect(data.lieux);
-                    })
+                if (clientId !== ''){                  
+                  fetch('/getlieuxbyidclient?clientId=' + clientId)
+                      .then(response => response.json())
+                      .then(data => {
+                          updateLieuxSelect(data.lieux);
+                      })
                     .catch(error => console.error('Erreur:', error));
+                } else{
+                  fetch('/getLieux')
+                      .then(response => response.json())
+                      .then(data => {
+                          updateLieuxSelect(data.lieux);
+                      })
+                    .catch(error => console.error('Erreur:', error));
+                }
             });
 
             function updateLieuxSelect(lieux) {
@@ -186,33 +212,33 @@
                 const aucunOption = new Option("Tous", "");
                 lieuSelect.add(aucunOption);
                 lieux.forEach(function (lieu) {
-                    const option = new Option(lieu.nom, lieu.idlieu);
+                    const option = new Option(lieu.entite, lieu.idinfoclient);
                     lieuSelect.add(option);
                 });
             }
 
             $(document).ready(function() {
-              // Sélectionnez tous les checkboxes avec la classe 'check-box'
-              var checkboxes = $('.check-box');
+                // Sélectionnez tous les checkboxes avec la classe 'check-box'
+                var checkboxes = $('.check-box');
 
-              // Fonction pour vérifier si au moins un checkbox est coché
-              function isAnyChecked() {
-                  return checkboxes.is(':checked');
-              }
+                // Fonction pour vérifier si au moins un checkbox est coché
+                function isAnyChecked() {
+                    return checkboxes.is(':checked');
+                }
 
-              // Activez ou désactivez le bouton 'Payer' en fonction de l'état des checkboxes
-              checkboxes.on('change', function() {
-                  if (isAnyChecked()) {
-                      $('button[type=submit]').prop('disabled', false); // Active le bouton
-                  } else {
-                      $('button[type=submit]').prop('disabled', true); // Désactive le bouton
-                  }
-              });
+                // Activez ou désactivez le bouton 'Payer' en fonction de l'état des checkboxes
+                checkboxes.on('change', function() {
+                    if (isAnyChecked()) {
+                        $('button[type=submit]').prop('disabled', false); // Active le bouton
+                    } else {
+                        $('button[type=submit]').prop('disabled', true); // Désactive le bouton
+                    }
+                });
 
-              // Initialisation : si aucun checkbox n'est coché au chargement de la page, désactivez le bouton
-              if (!isAnyChecked()) {
-                  $('button[type=submit]').prop('disabled', true);
-              }
+                // Initialisation : si aucun checkbox n'est coché au chargement de la page, désactivez le bouton
+                if (!isAnyChecked()) {
+                    $('button[type=submit]').prop('disabled', true);
+                }
             });
           </script>
 
